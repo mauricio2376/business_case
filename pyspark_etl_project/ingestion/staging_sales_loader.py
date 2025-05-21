@@ -3,6 +3,7 @@
 # Finalidade: Carregar staging de vendas (sales)
 # ===============================================
 
+from pyspark.sql.functions import col
 from ingestion.base_loader import BaseLoader
 
 class StagingSalesLoader(BaseLoader):

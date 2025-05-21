@@ -16,7 +16,6 @@ class FactSalesLoader(BaseLoader):
         # Transformações e joins
         fact_sales = (
             df_sales
-            .withColumn("volume", col("$ volume").cast("double"))
             .withColumn("year", col("year").cast("int"))
             .withColumn("month", col("month").cast("int"))
             .withColumn("date", to_date(col("date"), "M/d/yyyy"))
