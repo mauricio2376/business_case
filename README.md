@@ -1,4 +1,4 @@
-# Projeto de Engenharia de Dados - Business Case de Vendas de Bebidas
+# Projeto de Engenharia de Dados - Business Case
 
 Este projeto foi desenvolvido com o objetivo de estruturar uma pipeline completa para ingestão, transformação e análise de dados de vendas de bebidas utilizando o Databricks, PySpark, Delta Lake e Unity Catalog. O projeto é orientado a objetos e modularizado para facilitar manutenção e escalabilidade.
 
