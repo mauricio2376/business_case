@@ -36,8 +36,8 @@ if __name__ == "__main__":
         KpiSalesByBrandMonth().load()
         KpiLowestBrandByRegion().load()
 
-        logger.info("✅ Pipeline finalizado com sucesso!")
+        logger.info("Pipeline finalizado com sucesso!")
 
     except Exception as e:
-        logger.error(f"❌ Erro durante execução do pipeline: {str(e)}")
+        logger.error(f"Erro durante execução do pipeline: {str(e)}")
         raise
