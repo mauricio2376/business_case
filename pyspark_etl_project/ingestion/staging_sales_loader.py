@@ -12,7 +12,16 @@ class StagingSalesLoader(BaseLoader):
 
     def read(self):
         print(f"Lendo arquivo CSV de vendas: {self.path}")
-        return self.spark.read.option("header", True).option("encoding", "utf-8").option("sep", "\t").csv(self.path)
+        return (self
+                .spark
+                .read
+                .option("header", True)
+                .option("encoding", "utf-8")
+                .option("sep", "\t")
+                .csv(self.path)
+                .withColumn("Volume", col("$ Volume").cast("double"))
+                .drop("$ Volume")
+                )
 
     def transform(self, df):
         return df  # staging não precisa de transformação no momento
