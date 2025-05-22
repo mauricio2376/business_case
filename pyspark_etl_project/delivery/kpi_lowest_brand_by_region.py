@@ -34,11 +34,15 @@ class KpiLowestBrandByRegion(BaseLoader):
             # Determina o menor valor por região
             windowSpec = Window.partitionBy("btlr_org_lvl_c_desc").orderBy(col("total_sales").asc())
             lowest = query.withColumn("rank", row_number().over(windowSpec)).filter("rank = 1")
-            selected_columns = lowest.select(
-                                            "brand_nm",
-                                            "btlr_org_lvl_c_desc",
-                                            "total_sales"
-                                            )
+            selected_columns = (
+                                lowest.select(
+                                    "brand_nm",
+                                    "btlr_org_lvl_c_desc",
+                                    "total_sales",
+                                    "rank"
+                                )
+                                .orderBy(col("total_sales").asc())
+                            )
 
             # Escrita no Unity Catalog
             selected_columns.write \
