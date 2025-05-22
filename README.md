@@ -109,7 +109,6 @@ Todos os scripts fazem uso da biblioteca `logging` com formatação padrão e n�
 
 ## Padrão de Codificação
 
-- PEP8
 - Google Style para docstrings de classes e métodos
 - Estrutura orientada a objetos reutilizável
 - Colunas padronizadas com lowercase
