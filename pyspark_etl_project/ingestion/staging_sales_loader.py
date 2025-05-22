@@ -44,15 +44,10 @@ class StagingSalesLoader(BaseLoader):
             self.log(f"Erro ao ler arquivo de vendas: {str(e)}")
             raise
 
-    def transform(self, df: DataFrame) -> DataFrame:
-        """
-        Retorna os dados conforme lidos, sem transformações adicionais.
-
-        Args:
-            df (DataFrame): Dados brutos lidos do CSV.
-
-        Returns:
-            DataFrame: Dados prontos para escrita na staging.
-        """
-        self.log("Nenhuma transformação aplicada para staging de vendas.")
-        return df
+    def load(self):
+        try:
+            df = self.read()
+            self.write(df)
+        except Exception as e:
+            self.log(f"Erro ao carregar dados de vendas para staging: {str(e)}")
+            raise

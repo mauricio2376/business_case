@@ -35,8 +35,8 @@ if __name__ == "__main__":
         # ====================
         # 1. Carregamento das Stagings
         # ====================
-        StagingChannelLoader().read()
-        StagingSalesLoader().read()
+        StagingChannelLoader().load()
+        StagingSalesLoader().load()
 
         # ====================
         # 2. Carregamento das Dimensões

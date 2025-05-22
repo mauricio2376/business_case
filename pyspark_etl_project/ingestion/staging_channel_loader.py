@@ -39,15 +39,11 @@ class StagingChannelLoader(BaseLoader):
             self.log(f"Erro ao ler arquivo de canais: {str(e)}")
             raise
 
-    def transform(self, df: DataFrame) -> DataFrame:
-        """
-        Aplica transformações nos dados lidos (nenhuma no momento).
+    def load(self):
+        try:
+            df = self.read()
+            self.write(df)
+        except Exception as e:
+            self.log(f"Erro ao carregar dados de canais para staging: {str(e)}")
+            raise
 
-        Args:
-            df (DataFrame): Dados lidos do CSV.
-
-        Returns:
-            DataFrame: Dados sem transformação.
-        """
-        self.log("Nenhuma transformação aplicada para staging de canais.")
-        return df
