@@ -30,7 +30,7 @@ class KpiSalesByBrandMonth(BaseLoader):
                 .join(df_dim_brand.alias("b"), col("fs.ce_brand_flvr") == col("b.ce_brand_flvr"))
                 .groupBy("b.brand_nm", "fs.year", "fs.month")
                 .agg(round(_sum("fs.volume"), 2).alias("total_sales"))
-                .orderBy("fs.year", "fs.month")
+                .orderBy(col("total_sales").desc())
             )
 
             # Escrita no Unity Catalog
