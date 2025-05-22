@@ -1,5 +1,7 @@
 # main.py - Orquestrador de Cargas
 
+from ingestion.staging_channel_loader import StagingChannelLoader
+from ingestion.staging_sales_loader import StagingSalesLoader
 from dimensions.dim_brand_loader import DimBrandLoader
 from dimensions.dim_region_loader import DimRegionLoader
 from dimensions.dim_channel_loader import DimChannelLoader
@@ -31,19 +33,25 @@ if __name__ == "__main__":
 
     try:
         # ====================
-        # 1. Carregamento das Dimensões
+        # 1. Carregamento das Stagings
+        # ====================
+        StagingChannelLoader().read()
+        StagingSalesLoader().read()
+
+        # ====================
+        # 2. Carregamento das Dimensões
         # ====================
         DimBrandLoader().load()
         DimRegionLoader().load()
         DimChannelLoader().load()
 
         # ====================
-        # 2. Carregamento da Tabela Fato
+        # 3. Carregamento da Tabela Fato
         # ====================
         FactSalesLoader().load()
 
         # ====================
-        # 3. Cálculo e carga dos KPIs
+        # 4. Cálculo e carga dos KPIs
         # ====================
         KpiTop3GroupsByRegion().load()
         KpiSalesByBrandMonth().load()
