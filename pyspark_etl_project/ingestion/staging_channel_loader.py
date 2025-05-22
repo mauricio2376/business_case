@@ -40,9 +40,20 @@ class StagingChannelLoader(BaseLoader):
             raise
 
     def load(self):
+        """
+        Executa o processo completo de leitura e gravação da tabela de canais.
+        """
         try:
+            self.log("Iniciando carga da tabela de canais na camada staging...")
+
             df = self.read()
-            self.write(df)
+
+            df.write \
+                .mode("overwrite") \
+                .format("delta") \
+                .saveAsTable(f"{self.catalog}.{self.schema}.{self.table}")
+
+            self.log(f"Carga concluída com sucesso para: {self.catalog}.{self.schema}.{self.table}")
         except Exception as e:
             self.log(f"Erro ao carregar dados de canais para staging: {str(e)}")
             raise
